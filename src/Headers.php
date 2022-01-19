@@ -2,15 +2,14 @@
 
 namespace Hyqo\HTTP;
 
-use Hyqo\HTTP\Headers\Traits\ContentTrait;
-use Hyqo\HTTP\Headers\Traits\XForwardedTrait;
+use Hyqo\HTTP\Headers\Formatter;
 
 use function Hyqo\String\PascalCase;
 
 class Headers
 {
-    use ContentTrait;
-    use XForwardedTrait;
+    use Formatter\ContentFormatter;
+    use Formatter\XForwardedFormatter;
 
     protected $parameters = [];
 

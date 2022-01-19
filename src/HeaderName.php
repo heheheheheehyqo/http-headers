@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyqo\HTTP\Headers;
+namespace Hyqo\HTTP;
 
-abstract class Header
+abstract class HeaderName
 {
     public const CONTENT_TYPE = 'Content-Type';
     public const LOCATION = 'Location';

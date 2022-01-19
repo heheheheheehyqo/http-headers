@@ -2,7 +2,7 @@
 
 namespace Hyqo\HTTP\Headers;
 
-class HeaderUtils
+abstract class Utils
 {
     public static function split(string $string, string $delimiter): array
     {

@@ -1,17 +1,17 @@
 <?php
 
-namespace Hyqo\HTTP\Test\Headers\Traits;
+namespace Hyqo\HTTP\Test\Headers\Formatter;
 
+use Hyqo\HTTP\HeaderName;
 use Hyqo\HTTP\Headers;
-use Hyqo\HTTP\Headers\Header;
 use PHPUnit\Framework\TestCase;
 
-class ContentTraitTest extends TestCase
+class ContentFormatterTest extends TestCase
 {
     public function test_get_content_type()
     {
         $headers = new Headers([
-            Header::CONTENT_TYPE => 'foo; bar'
+            HeaderName::CONTENT_TYPE => 'foo; bar'
         ]);
 
         $this->assertEquals('foo', $headers->getContentType());

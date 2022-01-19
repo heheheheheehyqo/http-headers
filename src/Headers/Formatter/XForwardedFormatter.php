@@ -1,33 +1,33 @@
 <?php
 
-namespace Hyqo\HTTP\Headers\Traits;
+namespace Hyqo\HTTP\Headers\Formatter;
 
-use Hyqo\HTTP\Headers\Header;
-use Hyqo\HTTP\Headers\HeaderUtils;
+use Hyqo\HTTP\HeaderName;
+use Hyqo\HTTP\Headers\Utils;
 
-trait XForwardedTrait
+trait XForwardedFormatter
 {
     public function getForwarded(): array
     {
         $result = [
-            Header::X_FORWARDED_FOR => [],
-            Header::X_FORWARDED_PROTO => null,
-            Header::X_FORWARDED_HOST => null
+            HeaderName::X_FORWARDED_FOR => [],
+            HeaderName::X_FORWARDED_PROTO => null,
+            HeaderName::X_FORWARDED_HOST => null
         ];
 
-        if (!$this->has(Header::FORWARDED)) {
+        if (!$this->has(HeaderName::FORWARDED)) {
             return $result;
         }
 
-        $value = $this->get(Header::FORWARDED);
+        $value = $this->get(HeaderName::FORWARDED);
 
-        $parts = HeaderUtils::split($value, ';');
+        $parts = Utils::split($value, ';');
 
         foreach ($parts as $part) {
-            $items = HeaderUtils::split($part, ',');
+            $items = Utils::split($part, ',');
 
             foreach ($items as $item) {
-                if (!$keyValue = HeaderUtils::parsePair($item)) {
+                if (!$keyValue = Utils::parsePair($item)) {
                     continue;
                 }
 
@@ -35,10 +35,10 @@ trait XForwardedTrait
 
                 switch ($key) {
                     case 'for':
-                        $result[Header::X_FORWARDED_FOR][] = $value;
+                        $result[HeaderName::X_FORWARDED_FOR][] = $value;
                         break;
                     case 'proto':
-                        $result[Header::X_FORWARDED_PROTO] = (static function () use ($value): ?string {
+                        $result[HeaderName::X_FORWARDED_PROTO] = (static function () use ($value): ?string {
                             $value = strtolower($value);
 
                             if (in_array($value, ['https', 'http'])) {
@@ -49,7 +49,7 @@ trait XForwardedTrait
                         })();
                         break;
                     case 'by':
-                        $result[Header::X_FORWARDED_HOST] = $value;
+                        $result[HeaderName::X_FORWARDED_HOST] = $value;
                         break;
                 }
             }
@@ -62,12 +62,12 @@ trait XForwardedTrait
     {
         $forwarded = $this->getForwarded();
 
-        return $forwarded[Header::X_FORWARDED_FOR] ?: (function () {
-            $value = $this->get(Header::X_FORWARDED_FOR, '');
+        return $forwarded[HeaderName::X_FORWARDED_FOR] ?: (function () {
+            $value = $this->get(HeaderName::X_FORWARDED_FOR, '');
 
             $result = [];
 
-            $items = HeaderUtils::split($value, ',');
+            $items = Utils::split($value, ',');
 
             foreach ($items as $item) {
                 $item = trim($item, '"');
@@ -82,8 +82,8 @@ trait XForwardedTrait
     {
         $forwarded = $this->getForwarded();
 
-        return $forwarded[Header::X_FORWARDED_PROTO] ?: (function () {
-            $value = $this->get(Header::X_FORWARDED_PROTO, '');
+        return $forwarded[HeaderName::X_FORWARDED_PROTO] ?: (function () {
+            $value = $this->get(HeaderName::X_FORWARDED_PROTO, '');
             $value = strtolower($value);
 
             if (in_array($value, ['https', 'http'])) {
@@ -98,8 +98,8 @@ trait XForwardedTrait
     {
         $forwarded = $this->getForwarded();
 
-        return $forwarded[Header::X_FORWARDED_HOST] ?: (function () {
-            return $this->get(Header::X_FORWARDED_HOST);
+        return $forwarded[HeaderName::X_FORWARDED_HOST] ?: (function () {
+            return $this->get(HeaderName::X_FORWARDED_HOST);
         })();
     }
 }
