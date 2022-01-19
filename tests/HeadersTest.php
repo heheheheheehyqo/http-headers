@@ -2,6 +2,7 @@
 
 namespace Hyqo\HTTP\Test;
 
+use Hyqo\HTTP\HeaderName;
 use Hyqo\HTTP\Headers;
 use PHPUnit\Framework\TestCase;
 
@@ -15,8 +16,8 @@ class HeadersTest extends TestCase
         $headers = Headers::createFromGlobals();
 
         $this->assertEquals([
-            'Host' => 'foo',
-            'Content-Type' => 'bar',
+            HeaderName::HOST => 'foo',
+            HeaderName::CONTENT_TYPE => 'bar',
         ], $headers->all());
     }
 
