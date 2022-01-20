@@ -105,4 +105,17 @@ class XForwardedFormatterTest extends TestCase
 
         $this->assertEquals('foo', $headers->getXForwardedHost());
     }
+
+    public function test_get_x_forwarded_port()
+    {
+        $headers = new Headers([
+            HeaderName::X_FORWARDED_PORT => '123'
+        ]);
+
+        $this->assertEquals('123', $headers->getXForwardedPort());
+
+        $headers = new Headers();
+
+        $this->assertNull($headers->getXForwardedPort());
+    }
 }

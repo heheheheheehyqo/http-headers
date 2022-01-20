@@ -102,4 +102,9 @@ trait XForwardedFormatter
             return $this->get(HeaderName::X_FORWARDED_HOST);
         })();
     }
+
+    public function getXForwardedPort(): ?string
+    {
+        return $this->get(HeaderName::X_FORWARDED_PORT);
+    }
 }
