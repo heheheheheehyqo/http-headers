@@ -19,4 +19,5 @@ abstract class HeaderName
     public const X_FORWARDED_PROTO = 'X-Forwarded-Proto';
     public const X_FORWARDED_HOST = 'X-Forwarded-Host';
     public const X_FORWARDED_PORT = 'X-Forwarded-Port';
+    public const X_FORWARDED_PREFIX = 'X-Forwarded-Prefix';
 }

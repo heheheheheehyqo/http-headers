@@ -118,4 +118,17 @@ class XForwardedFormatterTest extends TestCase
 
         $this->assertNull($headers->getXForwardedPort());
     }
+
+    public function test_get_x_forwarded_prefix()
+    {
+        $headers = new Headers([
+            HeaderName::X_FORWARDED_PREFIX => '/prefix'
+        ]);
+
+        $this->assertEquals('/prefix', $headers->getXForwardedPrefix());
+
+        $headers = new Headers();
+
+        $this->assertNull($headers->getXForwardedPrefix());
+    }
 }

@@ -107,4 +107,9 @@ trait XForwardedFormatter
     {
         return $this->get(HeaderName::X_FORWARDED_PORT);
     }
+
+    public function getXForwardedPrefix(): ?string
+    {
+        return $this->get(HeaderName::X_FORWARDED_PREFIX);
+    }
 }
