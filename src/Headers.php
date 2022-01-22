@@ -10,6 +10,7 @@ class Headers
 {
     use Formatter\ContentFormatter;
     use Formatter\XForwardedFormatter;
+    use Formatter\ETagFormatter;
 
     protected $parameters = [];
 

@@ -12,6 +12,7 @@ abstract class HeaderName
     public const CONTENT_TYPE = 'Content-Type';
     public const LOCATION = 'Location';
 
+    public const IF_NONE_MATCH = 'If-None-Match';
     public const CACHE_CONTROL = 'Cache-Control';
 
     public const FORWARDED = 'Forwarded';
