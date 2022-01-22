@@ -29,4 +29,42 @@ trait CacheControlFormatter
 
         return $list;
     }
+
+    public function hasCacheControlDirective(string $directive): bool
+    {
+        return array_key_exists($directive, $this->getCacheControl());
+    }
+
+    public function getCacheControlDirective(string $directive): ?string
+    {
+        return $this->getCacheControl()[$directive] ?? null;
+    }
+
+    public function setCacheControlDirective(string $directive, ?string $value = null): void
+    {
+        $values = $this->getCacheControl();
+        $values[$directive] = $value ?? true;
+
+        $this->set(HeaderName::CACHE_CONTROL, $this->getCacheControlString($values));
+    }
+
+    public function getCacheControlString(?array $values = null): ?string
+    {
+        $values = $values ?? $this->getCacheControl();
+
+        if (!$values) {
+            return null;
+        }
+
+        return implode(
+            ', ',
+            array_map(static function (string $directive, $value) {
+                if ($value === true) {
+                    return $directive;
+                }
+
+                return sprintf('%s=%s', $directive, $value);
+            }, array_keys($values), array_values($values))
+        );
+    }
 }
