@@ -7,12 +7,12 @@ use Hyqo\HTTP\Headers\Utils;
 
 trait ETagFormatter
 {
-    public function getIfNoneMatch(): ?array
+    public function getIfNoneMatch(): array
     {
         $value = $this->get(HeaderName::IF_NONE_MATCH);
 
         if ($value === null) {
-            return null;
+            return [];
         }
 
         return array_map(static function (string $value) {

@@ -12,7 +12,7 @@ class ETagFormatterTest extends TestCase
     {
         $headers = new Headers();
 
-        $this->assertNull($headers->getIfNoneMatch());
+        $this->assertEquals([], $headers->getIfNoneMatch());
 
         $headers->set(HeaderName::IF_NONE_MATCH, '"675af34563dc-tr34"');
         $this->assertEquals(['675af34563dc-tr34'], $headers->getIfNoneMatch());

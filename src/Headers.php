@@ -11,6 +11,7 @@ class Headers
     use Formatter\ContentFormatter;
     use Formatter\XForwardedFormatter;
     use Formatter\ETagFormatter;
+    use Formatter\CacheControlFormatter;
 
     protected $parameters = [];
 
