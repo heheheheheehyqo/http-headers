@@ -1,15 +1,15 @@
 <?php
 
-namespace Hyqo\HTTP\Headers\Formatter;
+namespace Hyqo\Http\Headers\Formatter;
 
-use Hyqo\HTTP\HeaderName;
-use Hyqo\HTTP\Headers\Utils;
+use Hyqo\Http\HttpHeaderName;
+use Hyqo\Http\Headers\Utils;
 
 trait CacheControlFormatter
 {
     public function getCacheControl(): array
     {
-        $value = $this->get(HeaderName::CACHE_CONTROL);
+        $value = $this->get(HttpHeaderName::CACHE_CONTROL);
 
         if ($value === null) {
             return [];
@@ -45,7 +45,7 @@ trait CacheControlFormatter
         $values = $this->getCacheControl();
         $values[$directive] = $value ?? true;
 
-        $this->set(HeaderName::CACHE_CONTROL, $this->getCacheControlString($values));
+        $this->set(HttpHeaderName::CACHE_CONTROL, $this->getCacheControlString($values));
     }
 
     public function getCacheControlString(?array $values = null): ?string

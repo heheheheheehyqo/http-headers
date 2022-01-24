@@ -1,8 +1,8 @@
 <?php
 
-namespace Hyqo\HTTP;
+namespace Hyqo\Http;
 
-abstract class HeaderName
+abstract class HttpHeaderName
 {
     public const HOST = 'Host';
     public const REFERER = 'Referer';

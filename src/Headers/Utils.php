@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyqo\HTTP\Headers;
+namespace Hyqo\Http\Headers;
 
 abstract class Utils
 {

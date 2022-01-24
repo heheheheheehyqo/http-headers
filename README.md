@@ -14,9 +14,9 @@ composer require hyqo/http-headers
 ### Forwarded ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded))
 
 ```php
-use Hyqo\HTTP\Headers;
+use Hyqo\Http\HttpHeaders;
 
-$headers = new Headers(['Forwarded'=>'for=192.0.2.60; For="[2001:db8:cafe::17]:4711"; proto=https; by=203.0.113.43'])
+$headers = new HttpHeaders(['Forwarded'=>'for=192.0.2.60; For="[2001:db8:cafe::17]:4711"; proto=https; by=203.0.113.43'])
 $headers->getForwarded()
 ```
 ```text
@@ -37,9 +37,9 @@ array(3) {
 ### X-Forwarded-For ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For))
 
 ```php
-use Hyqo\HTTP\Headers;
+use Hyqo\Http\HttpHeaders;
 
-$headers = new Headers(['X-Forwarded-For'=>'192.0.2.60, "[2001:db8:cafe::17]:4711"'])
+$headers = new HttpHeaders(['X-Forwarded-For'=>'192.0.2.60, "[2001:db8:cafe::17]:4711"'])
 $headers->getXForwardedFor()
 ```
 ```text
@@ -54,8 +54,17 @@ string(24) "[2001:db8:cafe::17]:4711"
 ### X-Forwarded-Proto ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto))
 
 ```php
-use Hyqo\HTTP\Headers;
+use Hyqo\Http\HttpHeaders;
 
-$headers = new Headers(['X-Forwarded-Proto'=>'https'])
+$headers = new HttpHeaders(['X-Forwarded-Proto'=>'https'])
 $headers->getXForwardedProto(); //https
+```
+
+### X-Forwarded-Prefix ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto))
+
+```php
+use Hyqo\Http\HttpHeaders;
+
+$headers = new HttpHeaders(['X-Forwarded-Prefix'=>'/foo'])
+$headers->getXForwardedProto(); ///foo
 ```

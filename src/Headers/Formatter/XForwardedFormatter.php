@@ -1,25 +1,25 @@
 <?php
 
-namespace Hyqo\HTTP\Headers\Formatter;
+namespace Hyqo\Http\Headers\Formatter;
 
-use Hyqo\HTTP\HeaderName;
-use Hyqo\HTTP\Headers\Utils;
+use Hyqo\Http\HttpHeaderName;
+use Hyqo\Http\Headers\Utils;
 
 trait XForwardedFormatter
 {
     public function getForwarded(): array
     {
         $result = [
-            HeaderName::X_FORWARDED_FOR => [],
-            HeaderName::X_FORWARDED_PROTO => null,
-            HeaderName::X_FORWARDED_HOST => null
+            HttpHeaderName::X_FORWARDED_FOR => [],
+            HttpHeaderName::X_FORWARDED_PROTO => null,
+            HttpHeaderName::X_FORWARDED_HOST => null
         ];
 
-        if (!$this->has(HeaderName::FORWARDED)) {
+        if (!$this->has(HttpHeaderName::FORWARDED)) {
             return $result;
         }
 
-        $value = $this->get(HeaderName::FORWARDED);
+        $value = $this->get(HttpHeaderName::FORWARDED);
 
         $parts = Utils::split($value, ';');
 
@@ -35,10 +35,10 @@ trait XForwardedFormatter
 
                 switch ($key) {
                     case 'for':
-                        $result[HeaderName::X_FORWARDED_FOR][] = $value;
+                        $result[HttpHeaderName::X_FORWARDED_FOR][] = $value;
                         break;
                     case 'proto':
-                        $result[HeaderName::X_FORWARDED_PROTO] = (static function () use ($value): ?string {
+                        $result[HttpHeaderName::X_FORWARDED_PROTO] = (static function () use ($value): ?string {
                             $value = strtolower($value);
 
                             if (in_array($value, ['https', 'http'])) {
@@ -49,7 +49,7 @@ trait XForwardedFormatter
                         })();
                         break;
                     case 'by':
-                        $result[HeaderName::X_FORWARDED_HOST] = $value;
+                        $result[HttpHeaderName::X_FORWARDED_HOST] = $value;
                         break;
                 }
             }
@@ -62,8 +62,8 @@ trait XForwardedFormatter
     {
         $forwarded = $this->getForwarded();
 
-        return $forwarded[HeaderName::X_FORWARDED_FOR] ?: (function () {
-            $value = $this->get(HeaderName::X_FORWARDED_FOR, '');
+        return $forwarded[HttpHeaderName::X_FORWARDED_FOR] ?: (function () {
+            $value = $this->get(HttpHeaderName::X_FORWARDED_FOR, '');
 
             $result = [];
 
@@ -82,8 +82,8 @@ trait XForwardedFormatter
     {
         $forwarded = $this->getForwarded();
 
-        return $forwarded[HeaderName::X_FORWARDED_PROTO] ?: (function () {
-            $value = $this->get(HeaderName::X_FORWARDED_PROTO, '');
+        return $forwarded[HttpHeaderName::X_FORWARDED_PROTO] ?: (function () {
+            $value = $this->get(HttpHeaderName::X_FORWARDED_PROTO, '');
             $value = strtolower($value);
 
             if (in_array($value, ['https', 'http'])) {
@@ -98,18 +98,18 @@ trait XForwardedFormatter
     {
         $forwarded = $this->getForwarded();
 
-        return $forwarded[HeaderName::X_FORWARDED_HOST] ?: (function () {
-            return $this->get(HeaderName::X_FORWARDED_HOST);
+        return $forwarded[HttpHeaderName::X_FORWARDED_HOST] ?: (function () {
+            return $this->get(HttpHeaderName::X_FORWARDED_HOST);
         })();
     }
 
     public function getXForwardedPort(): ?string
     {
-        return $this->get(HeaderName::X_FORWARDED_PORT);
+        return $this->get(HttpHeaderName::X_FORWARDED_PORT);
     }
 
     public function getXForwardedPrefix(): ?string
     {
-        return $this->get(HeaderName::X_FORWARDED_PREFIX);
+        return $this->get(HttpHeaderName::X_FORWARDED_PREFIX);
     }
 }

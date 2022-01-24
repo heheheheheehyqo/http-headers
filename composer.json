@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Hyqo\\HTTP\\": "src"
+            "Hyqo\\Http\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Hyqo\\HTTP\\Test\\": "tests"
+            "Hyqo\\Http\\Test\\": "tests"
         }
     }
 }

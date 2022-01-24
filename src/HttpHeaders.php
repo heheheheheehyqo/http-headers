@@ -1,12 +1,12 @@
 <?php
 
-namespace Hyqo\HTTP;
+namespace Hyqo\Http;
 
-use Hyqo\HTTP\Headers\Formatter;
+use Hyqo\Http\Headers\Formatter;
 
 use function Hyqo\String\PascalCase;
 
-class Headers
+class HttpHeaders
 {
     use Formatter\ContentFormatter;
     use Formatter\XForwardedFormatter;

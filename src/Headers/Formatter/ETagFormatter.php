@@ -1,15 +1,15 @@
 <?php
 
-namespace Hyqo\HTTP\Headers\Formatter;
+namespace Hyqo\Http\Headers\Formatter;
 
-use Hyqo\HTTP\HeaderName;
-use Hyqo\HTTP\Headers\Utils;
+use Hyqo\Http\HttpHeaderName;
+use Hyqo\Http\Headers\Utils;
 
 trait ETagFormatter
 {
     public function getIfNoneMatch(): array
     {
-        $value = $this->get(HeaderName::IF_NONE_MATCH);
+        $value = $this->get(HttpHeaderName::IF_NONE_MATCH);
 
         if ($value === null) {
             return [];

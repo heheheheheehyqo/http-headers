@@ -1,15 +1,15 @@
 <?php
 
-namespace Hyqo\HTTP\Headers\Formatter;
+namespace Hyqo\Http\Headers\Formatter;
 
-use Hyqo\HTTP\HeaderName;
-use Hyqo\HTTP\Headers\Utils;
+use Hyqo\Http\HttpHeaderName;
+use Hyqo\Http\Headers\Utils;
 
 trait ContentFormatter
 {
     public function getContentType(): ?string
     {
-        $value = $this->get(HeaderName::CONTENT_TYPE);
+        $value = $this->get(HttpHeaderName::CONTENT_TYPE);
 
         if ($value === null) {
             return null;
