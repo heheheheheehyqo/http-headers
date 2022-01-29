@@ -109,7 +109,7 @@ class XForwardedTraitTest extends TestCase
                 HttpHeaderName::FORWARDED => '192.0.2.43',
                 HttpHeaderName::X_FORWARDED_FOR => '"[2001:db8:cafe::17]"'
             ],
-            ['192.0.2.43']
+            ['[2001:db8:cafe::17]']
         ];
 
         yield [
