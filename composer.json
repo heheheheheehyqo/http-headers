@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.2 <8.1",
         "hyqo/string": "^2.6",
         "hyqo/parse-pair": "^1.0",
         "hyqo/http-codes": "^1.0"
