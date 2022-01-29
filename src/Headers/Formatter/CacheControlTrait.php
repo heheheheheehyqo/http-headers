@@ -3,9 +3,13 @@
 namespace Hyqo\Http\Headers\Formatter;
 
 use Hyqo\Http\HttpHeaderName;
-use Hyqo\Http\Headers\Utils;
 
-trait CacheControlFormatter
+use Hyqo\String\SplitFlag;
+
+use function Hyqo\Parser\parse_pair;
+use function Hyqo\String\s;
+
+trait CacheControlTrait
 {
     public function getCacheControl(): array
     {
@@ -17,9 +21,9 @@ trait CacheControlFormatter
 
         $list = [];
 
-        foreach (Utils::split($value, ',') as $string) {
-            if (strpos($string, '=')) {
-                [$key, $value] = Utils::parsePair($string);
+        foreach (s($value)->splitStrictly(',') as $string) {
+            if ($pair = parse_pair($string)) {
+                [$key, $value] = $pair;
 
                 $list[$key] = $value;
             } else {

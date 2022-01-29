@@ -6,7 +6,7 @@ use Hyqo\Http\HttpHeaderName;
 use Hyqo\Http\HttpHeaders;
 use PHPUnit\Framework\TestCase;
 
-class CacheControlFormatterTest extends TestCase
+class CacheControlTraitTest extends TestCase
 {
     public function test_get_cache_control()
     {
@@ -32,6 +32,18 @@ class CacheControlFormatterTest extends TestCase
 
         $headers->set(HttpHeaderName::CACHE_CONTROL, 'public, max-age=604800');
         $this->assertEquals('604800', $headers->getCacheControlDirective('max-age'));
+    }
+
+    public function test_has_cache_control_directive()
+    {
+        $headers = new HttpHeaders();
+
+        $this->assertFalse($headers->hasCacheControlDirective('public'));
+        $this->assertFalse($headers->hasCacheControlDirective('max-age'));
+
+        $headers->set(HttpHeaderName::CACHE_CONTROL, 'public, max-age=604800');
+        $this->assertTrue($headers->hasCacheControlDirective('public'));
+        $this->assertTrue($headers->hasCacheControlDirective('max-age'));
     }
 
     public function test_set_cache_control_directive()

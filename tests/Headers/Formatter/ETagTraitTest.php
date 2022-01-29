@@ -6,7 +6,7 @@ use Hyqo\Http\HttpHeaderName;
 use Hyqo\Http\HttpHeaders;
 use PHPUnit\Framework\TestCase;
 
-class ETagFormatterTest extends TestCase
+class ETagTraitTest extends TestCase
 {
     public function test_get_if_none_match()
     {

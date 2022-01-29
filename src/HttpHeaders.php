@@ -8,10 +8,10 @@ use function Hyqo\String\PascalCase;
 
 class HttpHeaders
 {
-    use Formatter\ContentFormatter;
-    use Formatter\XForwardedFormatter;
-    use Formatter\ETagFormatter;
-    use Formatter\CacheControlFormatter;
+    use Formatter\ContentTrait;
+    use Formatter\XForwardedTrait;
+    use Formatter\ETagTrait;
+    use Formatter\CacheControlTrait;
 
     protected $parameters = [];
 

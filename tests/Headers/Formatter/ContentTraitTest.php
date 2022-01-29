@@ -2,19 +2,28 @@
 
 namespace Hyqo\Http\Test\Headers\Formatter;
 
+use Hyqo\Http\Headers\ContentType;
 use Hyqo\Http\HttpHeaderName;
 use Hyqo\Http\HttpHeaders;
 use PHPUnit\Framework\TestCase;
 
-class ContentFormatterTest extends TestCase
+class ContentTraitTest extends TestCase
 {
     public function test_get_content_type()
     {
         $headers = new HttpHeaders([
-            HttpHeaderName::CONTENT_TYPE => 'foo; bar'
+            HttpHeaderName::CONTENT_TYPE => ContentType::JSON
         ]);
 
-        $this->assertEquals('foo', $headers->getContentType());
+        $this->assertEquals(ContentType::JSON, $headers->getContentType());
+    }
+
+    public function test_set_content_type()
+    {
+        $headers = new HttpHeaders();
+        $headers->setContentType(ContentType::JSON());
+
+        $this->assertEquals(ContentType::JSON, $headers->getContentType());
     }
 
     public function test_get_content_type_from_globals()

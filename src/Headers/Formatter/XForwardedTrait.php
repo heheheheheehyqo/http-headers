@@ -3,9 +3,11 @@
 namespace Hyqo\Http\Headers\Formatter;
 
 use Hyqo\Http\HttpHeaderName;
-use Hyqo\Http\Headers\Utils;
 
-trait XForwardedFormatter
+use function Hyqo\Parser\parse_pair;
+use function Hyqo\String\s;
+
+trait XForwardedTrait
 {
     public function getForwarded(): array
     {
@@ -21,19 +23,19 @@ trait XForwardedFormatter
 
         $value = $this->get(HttpHeaderName::FORWARDED);
 
-        $parts = Utils::split($value, ';');
+        $parts = s($value)->splitStrictly(';');
 
         foreach ($parts as $part) {
-            $items = Utils::split($part, ',');
+            $items = s($part)->splitStrictly(',');
 
             foreach ($items as $item) {
-                if (!$keyValue = Utils::parsePair($item)) {
+                if (!$pair = parse_pair($item)) {
                     continue;
                 }
 
-                [$key, $value] = $keyValue;
+                [$key, $value] = $pair;
 
-                switch ($key) {
+                switch (s($key)->lower()) {
                     case 'for':
                         $result[HttpHeaderName::X_FORWARDED_FOR][] = $value;
                         break;
@@ -67,7 +69,7 @@ trait XForwardedFormatter
 
             $result = [];
 
-            $items = Utils::split($value, ',');
+            $items = s($value)->splitStrictly(',');
 
             foreach ($items as $item) {
                 $item = trim($item, '"');

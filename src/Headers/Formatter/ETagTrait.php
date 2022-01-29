@@ -3,9 +3,12 @@
 namespace Hyqo\Http\Headers\Formatter;
 
 use Hyqo\Http\HttpHeaderName;
-use Hyqo\Http\Headers\Utils;
 
-trait ETagFormatter
+use Hyqo\String\SplitFlag;
+
+use function Hyqo\String\s;
+
+trait ETagTrait
 {
     public function getIfNoneMatch(): array
     {
@@ -20,6 +23,6 @@ trait ETagFormatter
             $value = trim($value, '"');
 
             return $value;
-        }, Utils::split($value, ','));
+        }, s($value)->splitStrictly( ','));
     }
 }
