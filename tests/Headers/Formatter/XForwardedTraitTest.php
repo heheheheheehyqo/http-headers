@@ -81,7 +81,7 @@ class XForwardedTraitTest extends TestCase
         $this->assertEquals($expected, $httpHeaders->getXForwardedFor());
     }
 
-    private function provideGetXForwardedForData(): \Generator
+    public function provideGetXForwardedForData(): \Generator
     {
         yield [
             [
