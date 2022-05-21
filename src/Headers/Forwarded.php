@@ -60,11 +60,11 @@ class Forwarded
             case Header::X_FORWARDED_FOR:
                 $this->for = $this->parseList($value);
                 break;
-            case Header::X_FORWARDED_HOST:
-                $this->host = $this->parseValue($value);
-                break;
             case Header::X_FORWARDED_PROTO:
                 $this->proto = $this->parseValue(strtolower($value), ['https', 'http']);
+                break;
+            case Header::X_FORWARDED_HOST:
+                $this->host = $this->parseValue($value);
                 break;
             case Header::X_FORWARDED_PORT:
                 $this->port = (int)$value;
@@ -128,5 +128,16 @@ class Forwarded
     public function getPrefix(): ?string
     {
         return $this->prefix;
+    }
+
+    public function all(): array
+    {
+        return [
+            'for' => $this->getFor(),
+            'proto' => $this->getProto(),
+            'host' => $this->getHost(),
+            'port' => $this->getPort(),
+            'prefix' => $this->getPrefix(),
+        ];
     }
 }

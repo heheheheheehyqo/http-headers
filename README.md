@@ -1,4 +1,5 @@
 # http-headers
+
 ![Packagist Version](https://img.shields.io/packagist/v/hyqo/http-headers?style=flat-square)
 ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/hyqo/http-headers?style=flat-square)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/hyqo/http-headers/run-tests?style=flat-square)
@@ -14,34 +15,23 @@ composer require hyqo/http-headers
 ### Forwarded ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded))
 
 ```php
-use Hyqo\Http\HttpHeaders;
+use Hyqo\Http\RequestHeaders;
 
-$headers = new HttpHeaders(['Forwarded'=>'for=192.0.2.60; For="[2001:db8:cafe::17]:4711"; proto=https; by=203.0.113.43'])
-$headers->getForwarded()
+$headers = new RequestHeaders(['Forwarded'=>'for=192.0.2.60; For="[2001:db8:cafe::17]:4711"; proto=https; by=203.0.113.43'])
+$headers->forwarded->getFor(); //["192.0.2.60","[2001:db8:cafe::17]:4711"]
+$headers->forwarded->getProto(); //"https"
+$headers->forwarded->getHost(); //"203.0.113.43"
 ```
-```text
-array(3) {
-  ["X-Forwarded-For"]=>
-  array(2) {
-    [0]=>
-    string(10) "192.0.2.60"
-    [1]=>
-    string(24) "[2001:db8:cafe::17]:4711"
-  }
-  ["X-Forwarded-Proto"]=>
-  string(5) "https"
-  ["X-Forwarded-Host"]=>
-  string(12) "203.0.113.43"
-}
-```
+
 ### X-Forwarded-For ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For))
 
 ```php
-use Hyqo\Http\HttpHeaders;
+use Hyqo\Http\RequestHeaders;
 
-$headers = new HttpHeaders(['X-Forwarded-For'=>'192.0.2.60, "[2001:db8:cafe::17]:4711"'])
-$headers->getXForwardedFor()
+$headers = new RequestHeaders(['X-Forwarded-For'=>'192.0.2.60, "[2001:db8:cafe::17]:4711"'])
+$headers->forwarded->getFor()
 ```
+
 ```text
 array(2) {
 [0]=>
@@ -54,17 +44,17 @@ string(24) "[2001:db8:cafe::17]:4711"
 ### X-Forwarded-Proto ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto))
 
 ```php
-use Hyqo\Http\HttpHeaders;
+use Hyqo\Http\RequestHeaders;
 
-$headers = new HttpHeaders(['X-Forwarded-Proto'=>'https'])
-$headers->getXForwardedProto(); //https
+$headers = new RequestHeaders(['X-Forwarded-Proto'=>'https'])
+$headers->forwarded->getProto()(); //https
 ```
 
-### X-Forwarded-Prefix ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto))
+### X-Forwarded-Prefix
 
 ```php
-use Hyqo\Http\HttpHeaders;
+use Hyqo\Http\RequestHeaders;
 
-$headers = new HttpHeaders(['X-Forwarded-Prefix'=>'/foo'])
-$headers->getXForwardedProto(); ///foo
+$headers = new RequestHeaders(['X-Forwarded-Prefix'=>'/foo'])
+$headers->forwarded->getPrefix(); //"/foo"
 ```
