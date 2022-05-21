@@ -35,12 +35,13 @@ class Forwarded
 
                 switch (strtolower($key)) {
                     case 'for':
+                    case 'by':
                         $this->for[] = $value;
                         break;
                     case 'proto':
                         $this->proto = $this->parseValue(strtolower($value), ['https', 'http']);
                         break;
-                    case 'by':
+                    case 'host':
                         $this->host = $value;
                         break;
                 }

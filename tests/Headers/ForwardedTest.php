@@ -60,11 +60,11 @@ class ForwardedTest extends TestCase
         ];
 
         yield [
-            'for=192.0.2.60 ; proto=http; by=203.0.113.43',
+            'for=192.0.2.60 ; proto=http; by=203.0.113.43; host=cf.com',
             [
-                'for' => ['192.0.2.60'],
+                'for' => ['192.0.2.60', '203.0.113.43'],
                 'proto' => 'http',
-                'host' => '203.0.113.43',
+                'host' => 'cf.com',
                 'prefix' => null,
                 'port' => null,
             ]
@@ -165,7 +165,7 @@ class ForwardedTest extends TestCase
         $this->assertEquals('foo', $headers->forwarded->getHost());
 
         $headers = new RequestHeaders([
-            Header::FORWARDED => 'by=foo',
+            Header::FORWARDED => 'host=foo',
             Header::X_FORWARDED_HOST => 'bar'
         ]);
 
