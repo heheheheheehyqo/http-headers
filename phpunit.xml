@@ -9,6 +9,7 @@
         failOnRisky="true"
         beStrictAboutOutputDuringTests="true"
         verbose="true"
+        backupGlobals="true"
 >
     <testsuites>
         <testsuite name="Test Suite">

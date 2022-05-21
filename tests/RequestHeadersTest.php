@@ -2,35 +2,37 @@
 
 namespace Hyqo\Http\Test;
 
-use Hyqo\Http\HttpHeaderName;
-use Hyqo\Http\HttpHeaders;
+use Hyqo\Http\Header;
+use Hyqo\Http\RequestHeaders;
 use PHPUnit\Framework\TestCase;
 
-class HeadersTest extends TestCase
+class RequestHeadersTest extends TestCase
 {
     public function test_create_from_globals()
     {
         $_SERVER['HTTP_HOST'] = 'foo';
-        $_SERVER['CONTENT_TYPE'] = 'bar';
+        $_SERVER['CONTENT_TYPE'] = 'text/plain';
 
-        $headers = HttpHeaders::createFromGlobals();
+        $headers = RequestHeaders::createFromGlobals();
 
         $this->assertEquals([
-            HttpHeaderName::HOST => 'foo',
-            HttpHeaderName::CONTENT_TYPE => 'bar',
+            Header::HOST => 'foo',
+            Header::CONTENT_TYPE => 'text/plain',
         ], $headers->all());
     }
 
     public function test_get()
     {
-        $headers = new HttpHeaders(['foo' => 'bar']);
+        $headers = new RequestHeaders(['foo' => 'bar']);
 
         $this->assertEquals('bar', $headers->get('Foo'));
+        $this->assertEquals('default', $headers->get('not_exists', 'default'));
+        $this->assertNull($headers->get('not_exists'));
     }
 
     public function test_set()
     {
-        $headers = new HttpHeaders();
+        $headers = new RequestHeaders();
         $headers->set('foo', 'bar');
         $headers->set('FOO_BAR', 'bar');
 
@@ -40,7 +42,7 @@ class HeadersTest extends TestCase
 
     public function test_has()
     {
-        $headers = new HttpHeaders(['foo' => 'bar']);
+        $headers = new RequestHeaders(['foo' => 'bar']);
 
         $this->assertTrue($headers->has('Foo'));
         $this->assertFalse($headers->has('bar'));
@@ -48,7 +50,7 @@ class HeadersTest extends TestCase
 
     public function test_all()
     {
-        $headers = new HttpHeaders(['foo' => 'bar']);
+        $headers = new RequestHeaders(['foo' => 'bar']);
 
         $this->assertEquals(['Foo' => 'bar'], $headers->all());
     }
