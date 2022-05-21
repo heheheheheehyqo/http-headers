@@ -17,10 +17,10 @@ composer require hyqo/http-headers
 ```php
 use Hyqo\Http\RequestHeaders;
 
-$headers = new RequestHeaders(['Forwarded'=>'for=192.0.2.60; For="[2001:db8:cafe::17]:4711"; proto=https; by=203.0.113.43'])
+$headers = new RequestHeaders(['Forwarded'=>'for=192.0.2.60; For="[2001:db8:cafe::17]:4711"; proto=https; host=foo.bar'])
 $headers->forwarded->getFor(); //["192.0.2.60","[2001:db8:cafe::17]:4711"]
 $headers->forwarded->getProto(); //"https"
-$headers->forwarded->getHost(); //"203.0.113.43"
+$headers->forwarded->getHost(); //"foo.bar"
 ```
 
 ### X-Forwarded-For ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For))

@@ -60,11 +60,11 @@ class ForwardedTest extends TestCase
         ];
 
         yield [
-            'for=192.0.2.60 ; proto=http; by=203.0.113.43; host=cf.com',
+            'for=192.0.2.60 ; proto=http; by=203.0.113.43; host=foo.bar',
             [
                 'for' => ['192.0.2.60', '203.0.113.43'],
                 'proto' => 'http',
-                'host' => 'cf.com',
+                'host' => 'foo.bar',
                 'prefix' => null,
                 'port' => null,
             ]
