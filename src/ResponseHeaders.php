@@ -2,10 +2,10 @@
 
 namespace Hyqo\Http;
 
-use Hyqo\Http\Headers\CacheControlResponse;
-use Hyqo\Http\Headers\ContentDisposition;
-use Hyqo\Http\Headers\ContentType;
-use Hyqo\Http\Headers\Conditional;
+use Hyqo\Http\Header\CacheControlResponse;
+use Hyqo\Http\Header\ContentDisposition;
+use Hyqo\Http\Header\ContentType;
+use Hyqo\Http\Header\Conditional;
 
 /**
  * @property ContentType $contentType

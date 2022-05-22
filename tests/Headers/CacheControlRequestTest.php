@@ -2,8 +2,8 @@
 
 namespace Hyqo\Http\Test\Headers;
 
-use Hyqo\Http\Headers\CacheControlRequest;
-use Hyqo\Http\Headers\CacheControlResponse;
+use Hyqo\Http\Header\CacheControlRequest;
+use Hyqo\Http\Header\CacheControlResponse;
 use PHPUnit\Framework\TestCase;
 
 class CacheControlRequestTest extends TestCase

@@ -2,7 +2,7 @@
 
 namespace Hyqo\Http\Test\Headers;
 
-use Hyqo\Http\Headers\AcceptLanguage;
+use Hyqo\Http\Header\AcceptLanguage;
 use PHPUnit\Framework\TestCase;
 
 class AcceptLanguageTest extends TestCase

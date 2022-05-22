@@ -3,7 +3,7 @@
 namespace Hyqo\Http\Test\Headers;
 
 use Hyqo\Http\Header;
-use Hyqo\Http\Headers\CacheControl;
+use Hyqo\Http\Header\CacheControl;
 use Hyqo\Http\RequestHeaders;
 use PHPUnit\Framework\TestCase;
 

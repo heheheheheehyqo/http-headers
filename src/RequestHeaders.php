@@ -2,11 +2,11 @@
 
 namespace Hyqo\Http;
 
-use Hyqo\Http\Headers\AcceptLanguage;
-use Hyqo\Http\Headers\CacheControlRequest;
-use Hyqo\Http\Headers\ContentType;
-use Hyqo\Http\Headers\Forwarded;
-use Hyqo\Http\Headers\Conditional;
+use Hyqo\Http\Header\AcceptLanguage;
+use Hyqo\Http\Header\CacheControlRequest;
+use Hyqo\Http\Header\ContentType;
+use Hyqo\Http\Header\Forwarded;
+use Hyqo\Http\Header\Conditional;
 
 use function Hyqo\String\PascalCase;
 

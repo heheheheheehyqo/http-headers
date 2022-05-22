@@ -3,8 +3,8 @@
 namespace Hyqo\Http\Test\Headers;
 
 use Hyqo\Http\Header;
-use Hyqo\Http\Headers\Conditional;
-use Hyqo\Http\Headers\ETag;
+use Hyqo\Http\Header\Conditional;
+use Hyqo\Http\Header\ETag;
 use Hyqo\Http\RequestHeaders;
 use PHPUnit\Framework\TestCase;
 

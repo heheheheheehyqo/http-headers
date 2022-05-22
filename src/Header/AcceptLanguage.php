@@ -1,6 +1,6 @@
 <?php
 
-namespace Hyqo\Http\Headers;
+namespace Hyqo\Http\Header;
 
 use function Hyqo\String\s;
 
