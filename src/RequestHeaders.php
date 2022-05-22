@@ -116,12 +116,12 @@ class RequestHeaders
 
     public function __set($name, $value)
     {
-        // TODO: Implement __set() method.
+        throw new \RuntimeException("Property $name cannot be set");
     }
 
     public function __isset($name)
     {
-        // TODO: Implement __isset() method.
+        return false;
     }
 
     protected function getCacheControl(): CacheControlRequest
