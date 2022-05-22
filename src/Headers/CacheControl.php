@@ -14,9 +14,11 @@ abstract class CacheControl
     public const NO_STORE = 'no-store';
     public const NO_TRANSFORM = 'no-transform';
 
-    public const STALE_IF_ERROR = 'stale-if-error';
-
     protected $directives = [];
+
+    protected const WITH_VALUE = [
+        self::MAX_AGE,
+    ];
 
     public function __toString(): string
     {
@@ -88,6 +90,13 @@ abstract class CacheControl
             && defined(sprintf('static::%s', snake_case($directive, '_', true)))
         ) {
             $this->directives[$directive] = true;
+        }
+    }
+
+    public function removeDirective(string $directive): void
+    {
+        if (array_key_exists($directive, $this->directives)) {
+            unset($this->directives[$directive]);
         }
     }
 

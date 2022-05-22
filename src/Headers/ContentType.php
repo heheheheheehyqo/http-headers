@@ -2,6 +2,8 @@
 
 namespace Hyqo\Http\Headers;
 
+use Hyqo\Http\Header;
+
 use function Hyqo\Parser\parse_pair;
 use function Hyqo\String\s;
 
@@ -18,10 +20,10 @@ class ContentType
     protected $charset = null;
     protected $boundary = null;
 
-    public function __toString(): string
+    public function header(): ?string
     {
         if (null === $this->mediaType) {
-            return '';
+            return null;
         }
 
         $string = $this->mediaType;
@@ -34,7 +36,7 @@ class ContentType
             $string .= sprintf('; boundary=%s', $this->charset);
         }
 
-        return $string ?? '';
+        return Header::CONTENT_TYPE . ': ' . $string;
     }
 
     public function set(string $value = null): self

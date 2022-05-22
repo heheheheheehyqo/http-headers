@@ -3,7 +3,6 @@
 namespace Hyqo\Http;
 
 use Hyqo\Http\Headers\AcceptLanguage;
-use Hyqo\Http\Headers\CacheControl;
 use Hyqo\Http\Headers\CacheControlRequest;
 use Hyqo\Http\Headers\ContentType;
 use Hyqo\Http\Headers\Forwarded;

@@ -12,8 +12,9 @@ abstract class Header
 
     public const USER_AGENT = 'User-Agent';
     public const CONTENT_TYPE = 'Content-Type';
-    public const CONTENT_LENGTH = 'Content-Length';
     public const CONTENT_ENCODING = 'Content-Encoding';
+    public const CONTENT_DISPOSITION = 'Content-Disposition';
+    public const CONTENT_LENGTH = 'Content-Length';
     public const CONTENT_LANGUAGE = 'Content-Language';
     public const LOCATION = 'Location';
 
