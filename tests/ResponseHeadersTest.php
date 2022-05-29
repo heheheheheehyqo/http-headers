@@ -31,6 +31,8 @@ class ResponseHeadersTest extends TestCase
             'Content-Disposition: inline',
             'foo: bar',
         ], iterator_to_array($responseHeaders->each()));
+
+        $this->assertEquals(HttpCode::OK, $responseHeaders->getCode()->value);
     }
 
     public function test_attachment(): void

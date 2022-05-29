@@ -109,6 +109,11 @@ class ResponseHeaders
         return $this;
     }
 
+    public function getCode(): HttpCode
+    {
+        return $this->code;
+    }
+
     public function set(string $name, string $value): void
     {
         $this->headers[$name] = $value;
