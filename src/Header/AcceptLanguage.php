@@ -6,7 +6,7 @@ use function Hyqo\String\s;
 
 class AcceptLanguage
 {
-    protected $languages = [];
+    protected array $languages = [];
 
     public function set(string $value = null): self
     {

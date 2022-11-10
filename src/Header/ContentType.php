@@ -15,10 +15,10 @@ class ContentType
     public const TEXT = 'text/plain';
     public const HTML = 'text/html';
 
-    protected $mediaChunks = null;
-    protected $mediaType = null;
-    protected $charset = null;
-    protected $boundary = null;
+    protected array $mediaChunks = [];
+    protected ?string $mediaType = null;
+    protected ?string $charset = null;
+    protected ?string $boundary = null;
 
     public function header(): ?string
     {

@@ -9,19 +9,17 @@ use Hyqo\Http\Header;
 class Conditional
 {
     /** @var ETag[]|null */
-    protected $match;
+    protected ?array $match;
 
     /** @var ETag[]|null */
-    protected $noneMatch;
+    protected ?array $noneMatch;
 
-    /** @var DateTimeImmutable|null */
-    protected $modifiedSince;
+    protected ?DateTimeImmutable $modifiedSince;
 
-    /** @var DateTimeImmutable|null */
-    protected $unmodifiedSince;
+    protected ?DateTimeImmutable $unmodifiedSince;
 
     /** @var DateTimeImmutable|ETag|null */
-    protected $range;
+    protected null|ETag|DateTimeImmutable $range;
 
     public function set(string $name, ?string $value): self
     {

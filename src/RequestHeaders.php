@@ -20,18 +20,15 @@ use function Hyqo\String\PascalCase;
 class RequestHeaders
 {
     /** @var string[] */
-    protected $headers = [];
+    protected array $headers = [];
 
-    /** @var ContentType */
-    protected $contentType;
+    protected ContentType $contentType;
 
-    /** @var int */
-    protected $contentLength;
+    protected ?int $contentLength;
 
-    /** @var AcceptLanguage */
-    protected $acceptLanguage;
+    protected AcceptLanguage $acceptLanguage;
 
-    protected $magicCache = [];
+    protected array $magicCache = [];
 
     public function __construct(array $headers = [])
     {
@@ -53,7 +50,7 @@ class RequestHeaders
         $headers = [];
 
         foreach ($source as $key => $value) {
-            if (strpos($key, 'HTTP_') !== false) {
+            if (str_starts_with($key, 'HTTP_')) {
                 $headers[substr($key, 5)] = $value;
             } elseif (\in_array($key, ['CONTENT_TYPE', 'CONTENT_LENGTH'], true)) {
                 $headers[$key] = $value;

@@ -9,7 +9,7 @@ class ContentDisposition
     public const INLINE = 'inline';
     public const ATTACHMENT = 'attachment';
 
-    protected $value;
+    protected ?string $value = null;
 
     public function header(): ?string
     {

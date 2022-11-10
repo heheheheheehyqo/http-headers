@@ -14,7 +14,7 @@ abstract class CacheControl
     public const NO_STORE = 'no-store';
     public const NO_TRANSFORM = 'no-transform';
 
-    protected $directives = [];
+    protected array $directives = [];
 
     protected const WITH_VALUE = [
         self::MAX_AGE,
@@ -43,8 +43,7 @@ abstract class CacheControl
         return array_key_exists(strtolower($directive), $this->directives);
     }
 
-    /** @return null|int|bool */
-    public function get(string $directive)
+    public function get(string $directive): bool|int|null
     {
         return $this->directives[$directive] ?? null;
     }

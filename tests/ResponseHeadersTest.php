@@ -18,7 +18,7 @@ class ResponseHeadersTest extends TestCase
     public function test_headers(): void
     {
         $responseHeaders = new ResponseHeaders();
-        $responseHeaders->setCode(HttpCode::OK());
+        $responseHeaders->setCode(HttpCode::OK);
         $responseHeaders->cacheControl->setNoCache()->setMaxAge(123);
         $responseHeaders->contentType->set('text/foo');
         $responseHeaders->contentDisposition->setInline();
@@ -32,7 +32,7 @@ class ResponseHeadersTest extends TestCase
             'foo: bar',
         ], iterator_to_array($responseHeaders->each()));
 
-        $this->assertEquals(HttpCode::OK, $responseHeaders->getCode()->value);
+        $this->assertEquals(HttpCode::OK, $responseHeaders->getCode());
     }
 
     public function test_attachment(): void

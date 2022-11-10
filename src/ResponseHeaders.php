@@ -15,13 +15,12 @@ use Hyqo\Http\Header\Conditional;
  */
 class ResponseHeaders
 {
-    /** @var HttpCode */
-    protected $code;
+    protected ?HttpCode $code = null;
 
     /** @var string[] */
-    protected $headers = [];
+    protected array $headers = [];
 
-    protected $magicCache = [];
+    protected array $magicCache = [];
 
     public function each(): \Generator
     {

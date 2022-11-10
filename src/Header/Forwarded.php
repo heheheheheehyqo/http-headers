@@ -9,11 +9,11 @@ use function Hyqo\String\s;
 
 class Forwarded
 {
-    protected $for = [];
-    protected $proto;
-    protected $host;
-    protected $port;
-    protected $prefix;
+    protected array $for = [];
+    protected ?string $proto = null;
+    protected ?string $host = null;
+    protected ?int $port = null;
+    protected ?string $prefix = null;
 
     public function set(?string $value = null): self
     {
