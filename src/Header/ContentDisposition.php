@@ -4,20 +4,18 @@ namespace Hyqo\Http\Header;
 
 use Hyqo\Http\Header;
 
-class ContentDisposition
+class ContentDisposition implements HeaderInterface
 {
     public const INLINE = 'inline';
     public const ATTACHMENT = 'attachment';
 
     protected ?string $value = null;
 
-    public function header(): ?string
+    public function generator(): \Generator
     {
         if ($this->value) {
-            return Header::CONTENT_DISPOSITION . ': ' . $this->value;
+            yield Header::CONTENT_DISPOSITION => $this->value;
         }
-
-        return null;
     }
 
     public function setInline(): void

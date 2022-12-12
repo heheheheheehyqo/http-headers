@@ -10,7 +10,6 @@ use Hyqo\Http\Header\Conditional;
 
 use function Hyqo\String\PascalCase;
 
-
 /**
  * @property ContentType $contentType
  * @property CacheControlRequest $cacheControl

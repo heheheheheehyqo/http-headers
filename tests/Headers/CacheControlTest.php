@@ -13,6 +13,10 @@ class CacheControlTest extends TestCase
     protected function create(): CacheControl
     {
         return new class extends CacheControl {
+            public function generator(): ?string
+            {
+                return '';
+            }
         };
     }
 

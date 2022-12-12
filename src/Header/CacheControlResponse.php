@@ -4,7 +4,7 @@ namespace Hyqo\Http\Header;
 
 use Hyqo\Http\Header;
 
-class CacheControlResponse extends CacheControl
+class CacheControlResponse extends CacheControl implements HeaderInterface
 {
     public const S_MAXAGE = 's-maxage';
 
@@ -26,17 +26,15 @@ class CacheControlResponse extends CacheControl
         self::STALE_IF_ERROR,
     ];
 
-    public function header(): ?string
+    public function generator(): \Generator
     {
         if ($this->has(self::NO_STORE)) {
-            return Header::CACHE_CONTROL . ': ' . self::NO_STORE;
+            yield Header::CACHE_CONTROL => self::NO_STORE;
         }
 
         if ($this->directives) {
-            return Header::CACHE_CONTROL . ': ' . $this;
+            yield Header::CACHE_CONTROL => (string)$this;
         }
-
-        return null;
     }
 
     public function setNoCache(): self

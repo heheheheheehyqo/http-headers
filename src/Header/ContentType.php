@@ -7,7 +7,7 @@ use Hyqo\Http\Header;
 use function Hyqo\Parser\parse_pair;
 use function Hyqo\String\s;
 
-class ContentType
+class ContentType implements HeaderInterface
 {
     public const JSON = 'application/json';
     public const FORM = 'application/x-www-form-urlencoded';
@@ -20,10 +20,10 @@ class ContentType
     protected ?string $charset = null;
     protected ?string $boundary = null;
 
-    public function header(): ?string
+    public function generator(): \Generator
     {
         if (null === $this->mediaType) {
-            return null;
+            return;
         }
 
         $string = $this->mediaType;
@@ -36,7 +36,7 @@ class ContentType
             $string .= sprintf('; boundary=%s', $this->charset);
         }
 
-        return Header::CONTENT_TYPE . ': ' . $string;
+        yield Header::CONTENT_TYPE => $string;
     }
 
     public function set(string $value = null): self

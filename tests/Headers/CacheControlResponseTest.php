@@ -69,22 +69,31 @@ class CacheControlResponseTest extends TestCase
             ->setStaleWhileRevalidate(123);
 
         $this->assertEquals(
-            'Cache-Control: public, max-age=123, s-maxage=123, immutable, must-revalidate, proxy-revalidate, must-understand, no-cache, no-transform, stale-if-error=123, stale-while-revalidate=123',
-            $cacheControl->header()
+            [
+                'Cache-Control' =>
+                    'public, max-age=123, s-maxage=123, immutable, must-revalidate, proxy-revalidate, must-understand, no-cache, no-transform, stale-if-error=123, stale-while-revalidate=123'
+            ],
+            iterator_to_array($cacheControl->generator())
         );
 
         $cacheControl->setPrivate();
 
         $this->assertEquals(
-            'Cache-Control: max-age=123, s-maxage=123, immutable, must-revalidate, proxy-revalidate, must-understand, no-cache, no-transform, stale-if-error=123, stale-while-revalidate=123, private',
-            $cacheControl->header()
+            [
+                'Cache-Control' =>
+                    'max-age=123, s-maxage=123, immutable, must-revalidate, proxy-revalidate, must-understand, no-cache, no-transform, stale-if-error=123, stale-while-revalidate=123, private'
+            ],
+            iterator_to_array($cacheControl->generator())
         );
 
         $cacheControl->setNoStore();
 
         $this->assertEquals(
-            'Cache-Control: no-store',
-            $cacheControl->header()
+            [
+                'Cache-Control' =>
+                    'no-store'
+            ],
+            iterator_to_array($cacheControl->generator())
         );
     }
 }

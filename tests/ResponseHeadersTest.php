@@ -30,7 +30,7 @@ class ResponseHeadersTest extends TestCase
             'Content-Type: text/foo',
             'Content-Disposition: inline',
             'foo: bar',
-        ], iterator_to_array($responseHeaders->each()));
+        ], $responseHeaders->all());
 
         $this->assertEquals(HttpCode::OK, $responseHeaders->getCode());
     }
@@ -42,12 +42,12 @@ class ResponseHeadersTest extends TestCase
 
         $this->assertEquals([
             'Content-Disposition: attachment',
-        ], iterator_to_array($responseHeaders->each()));
+        ], $responseHeaders->all());
 
         $responseHeaders->contentDisposition->setAttachment('foo.jpeg');
 
         $this->assertEquals([
             'Content-Disposition: attachment; filename="foo.jpeg"',
-        ], iterator_to_array($responseHeaders->each()));
+        ], $responseHeaders->all());
     }
 }

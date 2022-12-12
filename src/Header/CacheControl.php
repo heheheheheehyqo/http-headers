@@ -4,7 +4,6 @@ namespace Hyqo\Http\Header;
 
 use function Hyqo\Parser\parse_pair;
 use function Hyqo\String\s;
-use function Hyqo\String\snake_case;
 
 abstract class CacheControl
 {
@@ -62,7 +61,7 @@ abstract class CacheControl
         $parts = s($value)->splitStrictly(',');
 
         foreach ($parts as $part) {
-            if (strpos($part, '=') !== false) {
+            if (str_contains($part, '=')) {
                 if ($pair = parse_pair($part)) {
                     [$directive, $value] = $pair;
 
@@ -86,7 +85,7 @@ abstract class CacheControl
             }
         } elseif (
             !in_array($directive, static::WITH_VALUE, true)
-            && defined(sprintf('static::%s', snake_case($directive, '_', true)))
+            && defined(sprintf('static::%s', s($directive)->snakeCase('_', true)))
         ) {
             $this->directives[$directive] = true;
         }

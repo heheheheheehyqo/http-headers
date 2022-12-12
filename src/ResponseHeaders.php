@@ -2,73 +2,58 @@
 
 namespace Hyqo\Http;
 
-use Hyqo\Http\Header\CacheControlResponse;
-use Hyqo\Http\Header\ContentDisposition;
-use Hyqo\Http\Header\ContentType;
-use Hyqo\Http\Header\Conditional;
+use Hyqo\Http\Header\HeaderInterface;
 
 /**
- * @property ContentType $contentType
- * @property ContentDisposition $contentDisposition
- * @property CacheControlResponse $cacheControl
- * @property Conditional $if
+ * @property Header\ContentType $contentType
+ * @property Header\ContentDisposition $contentDisposition
+ * @property Header\CacheControlResponse $cacheControl
+ * @property Header\Conditional $if
  */
 class ResponseHeaders
 {
     protected ?HttpCode $code = null;
 
-    /** @var string[] */
+    /** @var array<string,string> */
     protected array $headers = [];
 
-    protected array $magicCache = [];
+    /** @var array<string, HeaderInterface> */
+    protected array $magicHeaders = [];
+
+    public function all(): array
+    {
+        $result = [];
+
+        if ($this->code) {
+            $result[] = $this->code->header();
+        }
+
+        foreach ($this->each() as $name => $value) {
+            $result[] = sprintf("%s: %s", $name, $value);
+        }
+
+        return $result;
+    }
 
     public function each(): \Generator
     {
-        if ($this->code) {
-            yield $this->code->header();
-        }
-
-        if ($header = $this->cacheControl->header()) {
-            yield $header;
-        }
-
-        if ($header = $this->contentType->header()) {
-            yield $header;
-        }
-
-        if ($header = $this->contentDisposition->header()) {
-            yield $header;
+        foreach ($this->magicHeaders as $header) {
+            yield from $header->generator();
         }
 
         foreach ($this->headers as $name => $value) {
-            yield $name . ': ' . $value;
+            yield $name => $value;
         }
     }
 
     public function __get($name)
     {
-        if (isset($this->magicCache[$name])) {
-            return $this->magicCache[$name];
-        }
-
-        switch ($name) {
-            case 'cacheControl':
-                $callable = [$this, 'getCacheControl'];
-                break;
-            case 'contentType':
-                $callable = [$this, 'getContentType'];
-                break;
-            case 'contentDisposition':
-                $callable = [$this, 'getContentDisposition'];
-                break;
-            case 'if':
-                $callable = [$this, 'getConditional'];
-                break;
-            default:
-                throw new \RuntimeException("Property $name doesn't exist");
-        }
-
-        return $this->magicCache[$name] = $callable();
+        return $this->magicHeaders[$name] ??= match ($name) {
+            'cacheControl' => new Header\CacheControlResponse(),
+            'contentType' => new Header\ContentType(),
+            'contentDisposition' => new Header\ContentDisposition(),
+            default => throw new \RuntimeException("Property $name doesn't exist"),
+        };
     }
 
     public function __set($name, $value)
@@ -79,26 +64,6 @@ class ResponseHeaders
     public function __isset($name)
     {
         return false;
-    }
-
-    protected function getCacheControl(): CacheControlResponse
-    {
-        return new CacheControlResponse;
-    }
-
-    protected function getContentType(): ContentType
-    {
-        return new ContentType;
-    }
-
-    protected function getContentDisposition(): ContentDisposition
-    {
-        return new ContentDisposition;
-    }
-
-    protected function getConditional(): Conditional
-    {
-        return new Conditional;
     }
 
     public function setCode(HttpCode $code): self

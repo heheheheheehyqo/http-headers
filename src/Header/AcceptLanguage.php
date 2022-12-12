@@ -8,7 +8,7 @@ class AcceptLanguage
 {
     protected array $languages = [];
 
-    public function set(string $value = null): self
+    public function set(string $value = null): static
     {
         if (null === $value) {
             return $this;
@@ -25,7 +25,7 @@ class AcceptLanguage
             )) {
                 $language = ($matches['all'] ?? '') ?: strtolower($matches['language']);
 //                $variety = strtolower($matches['variety'] ?? '');
-                $quality = $matches['quality'] ?? 1;
+                $quality = $matches['quality'] ?? 1.0;
 
                 if (!isset($this->languages[$language])) {
                     $this->languages[$language] = [];

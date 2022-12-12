@@ -21,7 +21,7 @@ class Conditional
     /** @var DateTimeImmutable|ETag|null */
     protected null|ETag|DateTimeImmutable $range;
 
-    public function set(string $name, ?string $value): self
+    public function set(string $name, ?string $value): static
     {
         if (null === $value) {
             return $this;
@@ -48,9 +48,11 @@ class Conditional
         return $this;
     }
 
-    public function setMatch(string $value): void
+    public function setMatch(string $value): static
     {
         $this->match = $this->parseETags($value);
+
+        return $this;
     }
 
     /** @return ETag[]|null */
@@ -59,9 +61,11 @@ class Conditional
         return $this->match;
     }
 
-    public function setNoneMatch(string $value): void
+    public function setNoneMatch(string $value): static
     {
         $this->noneMatch = $this->parseETags($value);
+
+        return $this;
     }
 
     /** @return ETag[]|null */
@@ -70,9 +74,11 @@ class Conditional
         return $this->noneMatch;
     }
 
-    public function setModifiedSince(string $value): void
+    public function setModifiedSince(string $value): static
     {
         $this->modifiedSince = $this->parseDateTime($value);
+
+        return $this;
     }
 
     /** @return DateTimeImmutable|null */
@@ -81,9 +87,11 @@ class Conditional
         return $this->modifiedSince;
     }
 
-    public function setUnmodifiedSince(string $value): void
+    public function setUnmodifiedSince(string $value): static
     {
         $this->unmodifiedSince = $this->parseDateTime($value);
+
+        return $this;
     }
 
     /** @return DateTimeImmutable|null */
@@ -92,13 +100,14 @@ class Conditional
         return $this->unmodifiedSince;
     }
 
-    public function setRange(string $value): void
+    public function setRange(string $value): static
     {
         $this->range = $this->parseDateTime($value) ?? (($eTags = $this->parseETags($value)) ? current($eTags) : null);
+
+        return $this;
     }
 
-    /** @return DateTimeImmutable|ETag|null */
-    public function getRange()
+    public function getRange(): DateTimeImmutable|ETag|null
     {
         return $this->range;
     }
