@@ -2,7 +2,7 @@
 
 ![Packagist Version](https://img.shields.io/packagist/v/hyqo/http-headers?style=flat-square)
 ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/hyqo/http-headers?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/hyqo/http-headers/run-tests?style=flat-square&label=tests)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/hyqo/http-headers/tests.yml?branch=main&label=tests&style=flat-square)
 
 ## Install
 
