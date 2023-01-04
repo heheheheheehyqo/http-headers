@@ -1,23 +1,19 @@
 <?php
 
-namespace Hyqo\Http\Header;
+namespace Hyqo\Http\Header\Response;
 
-use Hyqo\Http\Header;
+use function Hyqo\Parser\build_pair;
 
-class ContentDisposition
+class ContentDisposition implements ResponseHeaderInterface
 {
     public const INLINE = 'inline';
     public const ATTACHMENT = 'attachment';
 
     protected ?string $value = null;
 
-    public function header(): ?string
+    public function __toString(): string
     {
-        if ($this->value) {
-            return Header::CONTENT_DISPOSITION . ': ' . $this->value;
-        }
-
-        return null;
+        return $this->value ?: '';
     }
 
     public function setInline(): void
@@ -30,7 +26,7 @@ class ContentDisposition
         $this->value = self::ATTACHMENT;
 
         if ($filename) {
-            $this->value .= '; filename="' . $filename . '"';
+            $this->value .= '; ' . build_pair('filename', $filename);
         }
     }
 }
