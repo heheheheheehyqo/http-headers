@@ -7,8 +7,6 @@ class ETag
     public string $value;
     public bool $weak;
 
-    public const REGEX = '(?P<value>(?:[\x20\x21\x23-\x5b\x5d-\x7e]|\r\n[\t ]|\\\\"|\\\\[^"])*)';
-
     public function __construct(string $value, bool $weak = false)
     {
         $this->value = $value;
