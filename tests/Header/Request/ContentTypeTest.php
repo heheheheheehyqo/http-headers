@@ -69,4 +69,39 @@ class ContentTypeTest extends TestCase
         $this->assertNull($contentType->charset);
         $this->assertNull($contentType->boundary);
     }
+
+    public function test_is_text(): void
+    {
+        $contentType = new ContentType('text/plain');
+
+        $this->assertTrue($contentType->isText());
+    }
+
+    public function test_is_html(): void
+    {
+        $contentType = new ContentType('text/html');
+
+        $this->assertTrue($contentType->isHtml());
+    }
+
+    public function test_is_form(): void
+    {
+        $contentType = new ContentType('application/x-www-form-urlencoded');
+
+        $this->assertTrue($contentType->isForm());
+    }
+
+    public function test_is_json(): void
+    {
+        $contentType = new ContentType('application/json');
+
+        $this->assertTrue($contentType->isJson());
+    }
+
+    public function test_is_form_data(): void
+    {
+        $contentType = new ContentType('multipart/form-data');
+
+        $this->assertTrue($contentType->isFormData());
+    }
 }

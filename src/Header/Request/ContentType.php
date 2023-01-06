@@ -72,4 +72,29 @@ readonly class ContentType
 
         return $result;
     }
+
+    public function isText(): bool
+    {
+        return $this->mediaType === 'text/plain';
+    }
+
+    public function isHtml(): bool
+    {
+        return $this->mediaType === 'text/html';
+    }
+
+    public function isJson(): bool
+    {
+        return $this->mediaType === 'application/json';
+    }
+
+    public function isForm(): bool
+    {
+        return $this->mediaType === 'application/x-www-form-urlencoded';
+    }
+
+    public function isFormData(): bool
+    {
+        return $this->mediaType === 'multipart/form-data';
+    }
 }
