@@ -95,6 +95,9 @@ namespace PHPSTORM_META {
     expectedArguments(\Hyqo\Http\ResponseHeaders::setContentType(), 0, argumentsSet('media_types'));
     expectedArguments(\Hyqo\Http\ResponseHeaders::setContentType(), 1, argumentsSet('charsets'));
 
+    expectedArguments(\Hyqo\Http\Response::setContentType(), 0, argumentsSet('media_types'));
+    expectedArguments(\Hyqo\Http\Response::setContentType(), 1, argumentsSet('charsets'));
+
     expectedArguments(\Hyqo\Http\Header\Response\ContentType::__construct(), 0, argumentsSet('media_types'));
     expectedArguments(\Hyqo\Http\Header\Response\ContentType::__construct(), 1, argumentsSet('charsets'));
 }
