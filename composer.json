@@ -14,7 +14,7 @@
         "php": "^8.2",
         "hyqo/string": "^3.0",
         "hyqo/parse-pair": "^3.0",
-        "hyqo/uuid": "^1.0",
+        "hyqo/uid": "^1.0",
         "hyqo/http-codes": "^3.0"
     },
     "require-dev": {
